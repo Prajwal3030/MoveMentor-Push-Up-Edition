@@ -1,32 +1,40 @@
 MoveMentor Push-Up Edition
-Overview
-MoveMentor Push-Up Edition is a computer vision-based project that employs artificial intelligence to count push-ups in a given video. The system utilizes OpenCV for video processing and integrates the cvzone library for enhanced text rendering. Key points on the human body are detected using the PoseDetector class, and push-up counting is based on specific hand angles.
 
-Requirements
-Python 3.x
-OpenCV (pip install opencv-python)
-cvzone (pip install cvzone)
-Usage
-Clone the repository:
 
-bash
-Copy code
-git clone https://github.com/yourusername/MoveMentor-Push-Up-Edition.git
-cd MoveMentor-Push-Up-Edition
-Install the required dependencies:
+Import Required Libraries:
 
-bash
-Copy code
-pip install -r requirements.txt
-Run the program:
+Import the necessary libraries, including cv2 for OpenCV, cvzone for additional computer vision functions, and other standard libraries like math and numpy.
+Initialize Variables:
 
-bash
-Copy code
-python main.py
-Press 'q' to exit the program.
+Set initial values for variables like counter and direction.
+Open the video file using cv2.VideoCapture.
+Create a PoseDetector object from cvzone to detect and track human poses.
+Video Writer Setup:
 
-Configuration
-Specify the input video in the cap = cv2.VideoCapture('vid1.mp4') line in main.py. Change the filename to the desired video.
-Adjust the detection and tracking confidence thresholds by modifying the trackCon and detectionCon parameters in the PoseDetector instantiation.
-Output
-The program generates an output video (output.avi) where the push-up count is displayed in the top-left corner.
+Get the frames per second (fps) and total number of frames in the input video.
+Define the codec and create a VideoWriter object to write the processed frames to an output video file.
+Define Angle Calculation Function:
+
+Implement a function (angles) to calculate angles between specified key points on the detected human pose.
+Perform angle conversions and interpolations for better visualization.
+Update global variables like counter and direction based on the calculated angles.
+Main Processing Loop:
+
+Start a loop to read frames from the input video using cv2.VideoCapture.
+Resize each frame for consistency.
+Use cvzone to add a title to the processed frames.
+Utilize the PoseDetector to find and track the human pose in each frame.
+Extract landmarks and bounding box information from the pose detection results.
+Call the angles function to calculate angles and update push-up count and direction.
+Draw points on the frame if specified.
+Write the processed frame to the output video using VideoWriter.
+User Interaction:
+
+Break the processing loop if the user presses the 'q' key.
+Release video capture and writing resources.
+Cleanup:
+
+Release all resources (video capture, video writer, and any open windows).
+Execution:
+
+Execute the script, and it will process the input video, detecting and counting push-ups based on hand angles.
